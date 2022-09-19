@@ -13,18 +13,22 @@ class UsuariosPage extends StatefulWidget {
 class _UsuariosPageState extends State<UsuariosPage> {
   final usuarios = [
     Usuario(
-        online: true, email: "agostina@gmail.com", name: "Agostina", uid: "1"),
-    Usuario(online: false, email: "tomas@gmail.com", name: "Tomas", uid: "2"),
-    Usuario(online: true, email: "franco@gmail.com", name: "Franco", uid: "2"),
+        online: true,
+        email: "agostina@gmail.com",
+        nombre: "Agostina",
+        uid: "1"),
+    Usuario(online: false, email: "tomas@gmail.com", nombre: "Tomas", uid: "2"),
+    Usuario(
+        online: true, email: "franco@gmail.com", nombre: "Franco", uid: "2"),
   ];
 
-  RefreshController _refreshController =
+  final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("mi nombre"),
+          title: const Text("mi nombre"),
           elevation: 1,
           backgroundColor: Colors.white,
           leading: const IconButton(
@@ -36,7 +40,7 @@ class _UsuariosPageState extends State<UsuariosPage> {
           ),
           actions: [
             Container(
-              margin: EdgeInsets.only(right: 10),
+              margin: const EdgeInsets.only(right: 10),
               child: Icon(
                 Icons.check_circle,
                 color: Colors.blue[400],
@@ -52,7 +56,7 @@ class _UsuariosPageState extends State<UsuariosPage> {
           controller: _refreshController,
           enablePullDown: true,
           header: WaterDropHeader(
-            waterDropColor: Color(0xFF42A5F5),
+            waterDropColor: const Color(0xFF42A5F5),
             complete: Icon(
               Icons.check,
               color: Colors.blue[400],
@@ -66,17 +70,17 @@ class _UsuariosPageState extends State<UsuariosPage> {
 
   ListView _listViewUsuarios() {
     return ListView.separated(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         itemBuilder: (_, index) => _usuarioListTile(usuarios[index]),
-        separatorBuilder: (_, index) => Divider(),
+        separatorBuilder: (_, index) => const Divider(),
         itemCount: usuarios.length);
   }
 
   ListTile _usuarioListTile(Usuario usuario) {
     return ListTile(
-      title: Text(usuario.name),
+      title: Text(usuario.nombre),
       subtitle: Text(usuario.email),
-      leading: CircleAvatar(child: Text(usuario.name.substring(0, 2))),
+      leading: CircleAvatar(child: Text(usuario.nombre.substring(0, 2))),
       trailing: Container(
         width: 10,
         height: 10,
@@ -90,7 +94,7 @@ class _UsuariosPageState extends State<UsuariosPage> {
   //simulacion
   _cargarUsuarios() async {
     // espera  1s
-    await Future.delayed(Duration(milliseconds: 1000));
+    await Future.delayed(const Duration(milliseconds: 1000));
     // if failed,use refreshFailed()
     //llama al refershController como completado
     _refreshController.refreshCompleted();
